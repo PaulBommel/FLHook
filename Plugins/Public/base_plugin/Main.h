@@ -27,6 +27,9 @@ static uint STORAGE_MODULE_CAPACITY = 40000;
 extern uint MAX_PINNED_ITEMS;
 const ushort DEFAULT_AFFILIATION = MakeId("fc_uk_grp");
 
+// SolarInfo::cNickName is char[64]: 1 byte null terminator, "pb_" prefix and up to 5 rand() digits for defense platforms.
+constexpr uint MAX_BASE_NAME_BYTES = 64 - 1 - 3 - 5;
+
 void LogCheater(uint client, const wstring& reason);
 uint GetAffliationFromClient(uint client);
 
@@ -360,6 +363,7 @@ public:
 	static void GenerateHashFile();
 
 	static string CreateBaseNickname(const string& basename);
+	static bool IsBaseNameTooLong(const wstring& basename);
 
 	float GetAttitudeTowardsClient(uint client);
 	void SyncReputationForBase();

@@ -3108,6 +3108,11 @@ namespace PlayerCommands
 			PrintUserCmdText(client, L"Usage: /base deploy <password> <name>");
 			return;
 		}
+		if (PlayerBase::IsBaseNameTooLong(basename))
+		{
+			PrintUserCmdText(client, L"ERR Base name too long");
+			return;
+		}
 
 		// Check for conflicting base name
 		if (GetPlayerBase(CreateID(PlayerBase::CreateBaseNickname(wstos(basename)).c_str())))
