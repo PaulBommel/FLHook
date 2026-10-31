@@ -105,7 +105,10 @@ void CoreModule::Spawn()
 			si.costume.body = CreateID("pi_pirate8_body");
 			si.iVoiceID = CreateID("atc_leg_m01");
 		}
-		strncpy_s(si.cNickName, sizeof(si.cNickName), base->nickname.c_str(), base->nickname.size());
+		if (strncpy_s(si.cNickName, sizeof(si.cNickName), base->nickname.c_str(), _TRUNCATE) == STRUNCATE)
+		{
+			AddLog("ERROR: base nickname too long, truncated: %s", base->nickname.c_str());
+		}
 
 		// Check to see if the hook IDS limit has been reached
 		static uint solar_ids = 526000;

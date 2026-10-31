@@ -3426,6 +3426,11 @@ bool ExecuteCommandString_Callback(CCmds* cmd, const wstring& args)
 			PrintUserCmdText(client, L"%s", usage.c_str());
 			return true;
 		}
+		if (PlayerBase::IsBaseNameTooLong(basename))
+		{
+			PrintUserCmdText(client, L"ERR Name too long");
+			return true;
+		}
 
 
 
@@ -3532,6 +3537,11 @@ bool ExecuteCommandString_Callback(CCmds* cmd, const wstring& args)
 		{
 			PrintUserCmdText(client, L"ERR No name");
 			PrintUserCmdText(client, L"Usage: .basecreate <password> <archtype> <loadout> <type> <name>");
+			return true;
+		}
+		if (PlayerBase::IsBaseNameTooLong(basename))
+		{
+			PrintUserCmdText(client, L"ERR Name too long");
 			return true;
 		}
 

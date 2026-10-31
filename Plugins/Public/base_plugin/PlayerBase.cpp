@@ -1156,6 +1156,12 @@ string PlayerBase::CreateBaseNickname(const string& basename)
 	return string("pb_") + basename;
 }
 
+bool PlayerBase::IsBaseNameTooLong(const wstring& basename)
+{
+	// The nickname is UTF-8, so non-latin characters take up to 3 bytes each
+	return wstos(basename).length() > MAX_BASE_NAME_BYTES;
+}
+
 uint PlayerBase::HasMarketItem(uint good)
 {
 	auto i = market_items.find(good);
